@@ -1,0 +1,27 @@
+:root{
+    /* Brand Colors */
+    --primary-color:#2563EB;
+    --primary-dark:#1D4ED8;
+
+    --accent-color:#FFC107;
+
+    --background-color:#F8F9FA;
+
+    --white:#FFFFFF;
+
+    --text-color:#212529;
+    --light-text:#6C757D;
+
+    /* Shadows */
+    --shadow-sm:0 4px 10px rgba(0,0,0,0.08);
+    --shadow-md:0 8px 25px rgba(0,0,0,0.12);
+    --shadow-lg:0 12px 40px rgba(0,0,0,0.18);
+
+    /* Border Radius */
+    --radius-sm:8px;
+    --radius-md:15px;
+    --radius-lg:25px;
+
+    /* Animation */
+    --transition:0.35s ease;
+}
