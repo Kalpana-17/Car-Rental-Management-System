@@ -1,18 +1,17 @@
 package com.carrental.car_rental_backend.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.carrental.car_rental_backend.entity.Payment;
-import com.carrental.car_rental_backend.entity.enums.PaymentMethod;
+import com.carrental.car_rental_backend.dto.PaymentRequestDTO;
+import com.carrental.car_rental_backend.dto.PaymentResponseDTO;
 import com.carrental.car_rental_backend.service.PaymentService;
 
 @RestController
-@RequestMapping("/bookings")
+@RequestMapping("/payments")
 public class PaymentController {
     private final PaymentService paymentService;
 
@@ -20,8 +19,8 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    @PostMapping("/{bookingId}/pay")
-    public ResponseEntity<Payment> makePayment(@PathVariable int bookingId, @RequestParam PaymentMethod paymentMethod) {
-        return ResponseEntity.ok(paymentService.makePayment(bookingId, paymentMethod));
+    @PostMapping
+    public ResponseEntity<PaymentResponseDTO> makePayment(@RequestBody PaymentRequestDTO request) {
+        return ResponseEntity.ok(paymentService.makePayment(request));
     }
 }

@@ -7,5 +7,5 @@ import com.carrental.car_rental_backend.entity.Company;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, Integer> {
-    
+    boolean existsByCompanyName(String companyName);
 }

@@ -16,6 +16,7 @@ import com.carrental.car_rental_backend.entity.Car;
 import com.carrental.car_rental_backend.service.CarService;
 
 @RestController
+@RequestMapping("/cars")
 public class CarController {
     private CarService carService;
 
@@ -23,29 +24,29 @@ public class CarController {
         this.carService = carService;
     }
 
-    @RequestMapping("/cars")
+    @GetMapping
     public ResponseEntity<List<Car>> getAllCars() {
         return ResponseEntity.ok(carService.getAllCars());
     }
 
-    @GetMapping("/cars/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Car> getCarById(@PathVariable int id) {
         return ResponseEntity.ok(carService.getCarById(id));
     }
 
-    @PostMapping("/cars")
+    @PostMapping
     public ResponseEntity<Car> saveCar(@RequestBody Car car) {
         // System.out.println(variant);
         Car savedCar = carService.saveCar(car);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCar);
     }
 
-    @PutMapping("/cars/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Car> updateVariant(@PathVariable int id, @RequestBody Car car) {
         return ResponseEntity.ok(carService.updateCar(id, car));
     }
 
-    @DeleteMapping("/cars/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCar(@PathVariable int id) {
         carService.deleteCar(id);
         return ResponseEntity.ok("Car Deleted Successfully");

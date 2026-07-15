@@ -6,7 +6,10 @@ import com.carrental.car_rental_backend.service.UserService;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import com.carrental.car_rental_backend.dto.UserRegistrationDTO;
 import com.carrental.car_rental_backend.entity.User;
+import com.carrental.car_rental_backend.entity.enums.Role;
 import com.carrental.car_rental_backend.exception.ResourceNotFoundException;
 
 @Service
@@ -53,5 +56,32 @@ public class UserServiceImpl implements UserService {
         .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         userRepository.delete(existingUser);
+    }
+
+    @Override
+    public User registerUser(UserRegistrationDTO request) {
+        if(userRepository.findByEmail(request.getEmail()).isPresent())
+            throw new RuntimeException("Email already registered");
+
+        User newUser = new User();
+
+        newUser.setFullName(request.getFullName());
+        newUser.setEmail(request.getEmail());
+        newUser.setPassword(request.getPassword());
+        newUser.setPhone(request.getPhone());
+        newUser.setLicenseNumber(request.getLicenseNumber());
+        newUser.setRole(Role.CUSTOMER);
+
+        return userRepository.save(newUser);
+    }
+
+    @Override
+    public User loginUser(String email, String password) {
+        User user = userRepository.findByEmail(email)
+                                .orElseThrow(() -> new ResourceNotFoundException("Invalid Email!"));
+        if(!user.getPassword().equals(password))
+            throw new ResourceNotFoundException("Invalid Password!");
+
+        return user;
     }
 }

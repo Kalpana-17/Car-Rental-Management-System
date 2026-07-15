@@ -10,3 +10,11 @@
     transform:translateY(-5px);
     box-shadow:var(--shadow-md);
 }
+
+.container-section{
+    padding:80px 0;
+}
+
+.text-muted{
+    color:var(--light-text);
+}

@@ -1,10 +1,11 @@
 package com.carrental.car_rental_backend.service;
 
 import java.util.List;
+
+import com.carrental.car_rental_backend.dto.UserRegistrationDTO;
 import com.carrental.car_rental_backend.entity.User;
 
 public interface UserService {
-
     List<User> getAllUsers();
 
     User getUserById(int id);
@@ -14,4 +15,8 @@ public interface UserService {
     User updateUser(int id, User user);
 
     void deleteUser(int id);
+
+    User registerUser(UserRegistrationDTO request);
+
+    User loginUser(String email, String password);
 }

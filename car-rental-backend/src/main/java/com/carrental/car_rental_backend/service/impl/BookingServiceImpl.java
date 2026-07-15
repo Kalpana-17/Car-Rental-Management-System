@@ -2,10 +2,12 @@ package com.carrental.car_rental_backend.service.impl;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.carrental.car_rental_backend.dto.BookingRequestDTO;
+import com.carrental.car_rental_backend.dto.BookingSummaryDTO;
 import com.carrental.car_rental_backend.entity.Booking;
 import com.carrental.car_rental_backend.entity.Car;
 import com.carrental.car_rental_backend.entity.User;
@@ -78,5 +80,56 @@ public class BookingServiceImpl implements BookingService {
         carRepository.save(car);
 
         return bookingRepository.save(booking);
+    }
+
+    public BookingSummaryDTO getBookingSummaryDTO(BookingRequestDTO request) {
+        User user = userRepository.findById(request.getUserId())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+        Car car = carRepository.findById(request.getCarId())
+                  .orElseThrow(() -> new RuntimeException("Car not found"));
+        
+        if (car.getCarStatus() != CarStatus.AVAILABLE) {
+            throw new RuntimeException("Car is not available");
+        }
+        if(request.getReturnDate().isBefore(request.getPickupDate())) {
+            throw new RuntimeException("Return date cannot be before pickup date");
+        }
+
+        long days = ChronoUnit.DAYS.between(
+            request.getPickupDate(), request.getReturnDate());
+        
+        if(days <= 0) {
+            throw new RuntimeException("Booking should be for least one day");
+        }
+
+        double totalAmount = days * car.getPricePerDay();
+
+        BookingSummaryDTO summary = new BookingSummaryDTO();
+
+        summary.setCompanyName(
+                car.getVariant().getCompany().getCompanyName());
+
+        summary.setVariantName(
+                car.getVariant().getVariantName());
+
+        summary.setPickupDate(request.getPickupDate());
+
+        summary.setReturnDate(request.getReturnDate());
+
+        summary.setTotalDays(days);
+
+        summary.setPricePerDay(car.getPricePerDay());
+
+        summary.setTotalAmount(totalAmount);
+
+        return summary;
+    }
+
+    @Override
+    public List<Booking> getBookingsByUserId(int userId) {
+        userRepository.findById(userId)
+                        .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        return bookingRepository.findByUserId(userId);
     }
 }

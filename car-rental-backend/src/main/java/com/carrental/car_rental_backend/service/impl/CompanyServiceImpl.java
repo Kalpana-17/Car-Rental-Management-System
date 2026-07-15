@@ -32,6 +32,10 @@ public class CompanyServiceImpl implements CompanyService {
         Company existingCompany = companyRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Company not found"));
 
+        if(companyRepository.existsByCompanyName(company.getCompanyName())){
+            throw new RuntimeException("Company already exists");
+        }
+
         existingCompany.setCompanyName(company.getCompanyName());
         existingCompany.setLogoURL(company.getLogoURL());
 

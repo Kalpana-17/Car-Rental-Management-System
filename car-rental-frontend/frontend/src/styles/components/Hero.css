@@ -1,0 +1,17 @@
+.cargo-hero{
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background:
+        linear-gradient(
+            rgba(10,25,47,.70),
+            rgba(10,25,47,.60)
+        ),
+        url("../../assets/images/hero.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}

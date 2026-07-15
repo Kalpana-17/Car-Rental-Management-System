@@ -47,4 +47,7 @@ public class Payment {
 
     @Column(name = "payment_date")
     private LocalDateTime paymentDate;
+
+    @Column(name = "idempotency_key", unique = true)
+    private String idempotencyKey;
 }

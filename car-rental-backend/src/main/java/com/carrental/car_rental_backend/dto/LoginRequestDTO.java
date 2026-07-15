@@ -1,7 +1,11 @@
 package com.carrental.car_rental_backend.dto;
 
-public class UserRegisterationDTO {
-    private String fullName;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class LoginRequestDTO {
     private String email;
     private String password;
 }

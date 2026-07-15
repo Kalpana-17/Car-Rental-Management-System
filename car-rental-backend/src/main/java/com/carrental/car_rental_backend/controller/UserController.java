@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.carrental.car_rental_backend.dto.LoginRequestDTO;
+import com.carrental.car_rental_backend.dto.UserRegistrationDTO;
 import com.carrental.car_rental_backend.entity.User;
 import com.carrental.car_rental_backend.service.UserService;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
     private UserService userService;
 
@@ -23,19 +27,19 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping("/users")
+    @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         //return userService.getAllUsers();
         return  ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable int id) {
         //return userService.getUserById(id);
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         //System.out.println(user);
         //return userService.saveUser(user);
@@ -43,16 +47,29 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
         //return userService.updateUser(id, user);
         return ResponseEntity.ok(userService.updateUser(id, user));
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
         //return "User Deleted Successfully";
         return ResponseEntity.ok("User Deleted Successfully");
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(@RequestBody UserRegistrationDTO request) {
+        User user = userService.registerUser(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestBody LoginRequestDTO request) {
+        return ResponseEntity.ok(
+            userService.loginUser(request.getEmail(), request.getPassword())
+        );
     }
 }
