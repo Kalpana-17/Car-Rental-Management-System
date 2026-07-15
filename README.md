@@ -101,27 +101,7 @@ MySQL Database
 
 # 📸 Screenshots
 
-## Home Page
-![Home](public/screenshots/home.png)
-
-## Cars
-![Cars](public/screenshots/cars.png)
-
-## Car Details
-![Car Details](public/screenshots/car-details.png)
-
-## Booking
-![Booking](public/screenshots/booking.png)
-
-## Payment
-![Payment](public/screenshots/payment.png)
-
-## My Bookings
-![My Bookings](public/screenshots/my-bookings.png)
-
-## Profile
-![Profile](public/screenshots/profile.png)
-
+Look at the screenshots for website samples in folder: car-rental-frontend/frontend/public/screenshots
 ---
 
 # 🚀 How to Run the Project
