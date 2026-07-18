@@ -106,6 +106,8 @@ Look at the screenshots for website samples in folder: car-rental-frontend/front
 
 # 🚀 How to Run the Project
 
+## Kindly note to configure applications.properties.
+
 ## 1. Clone the repositories
 
 ```
