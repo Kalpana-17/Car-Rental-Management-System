@@ -123,6 +123,8 @@ git clone [<frontend-repository-url>](https://github.com/Kalpana-17/Car-Rental-M
 cd car-rental-backend
 
 mvn spring-boot:run
+(or)
+.\mvnw.cmd clean spring-boot:run
 ```
 
 Backend runs on:
@@ -208,5 +210,11 @@ GitHub: https://github.com/Kalpana-17
 LinkedIn: https://www.linkedin.com/in/kalpana-kyama-931670232
 
 ---
+
+
+# Screenshots
+
+<img width="949" height="537" alt="image" src="https://github.com/user-attachments/assets/c36447ac-5b8e-49d6-ad7b-bc8958ebae6f" />
+
 
 ⭐ If you found this project useful, feel free to star the repository and give your suggestions too!
